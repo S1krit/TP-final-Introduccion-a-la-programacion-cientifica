@@ -139,6 +139,9 @@ with st.sidebar:
     if valores_personalizados is True:
       valores_predeterminados_UTN = False
 
+  st.markdown("---")
+  st.markdown("preuba")
+
 with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
   if archivo_subido is not None:  # Cálculos relacionados a la potencia generada
@@ -560,7 +563,3 @@ with t3:  #descargas
   
     # Cerrar el buffer
     buffer.close()  # Liberar los recursos del buffer
-
-st.markdown("---")
-st.markdown("preuba")
-
