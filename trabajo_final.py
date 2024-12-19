@@ -150,12 +150,12 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
     potencia_generada = cantidad_de_paneles * (archivo_pasado_a_pandas[col_irradiancia] / G_estandar) * P_pico * (1 + (k_de_temperatura_potencia *(archivo_pasado_a_pandas[col_temperatura] - T_de_referencia))) * rendimiento
 
     # Agrego la potencia al archivo pasado a pandas:
-    archivo_pasado_a_pandas['Potencia generada (kW)'] = potencia_generada
+    archivo_pasado_a_pandas['Potencia Generada (kW)'] = potencia_generada
 
     # Corrección para la potencia real ec(4)
     P_min = (0.1 / 100) * P_del_inversor
 
-    archivo_pasado_a_pandas['Potencia generada (kW)'] = archivo_pasado_a_pandas['Potencia generada (kW)'].apply(lambda x: 0 if x< P_min else(P_del_inversor if x> P_del_inversor else x))
+    archivo_pasado_a_pandas['Potencia Generada (kW)'] = archivo_pasado_a_pandas['Potencia Generada (kW)'].apply(lambda x: 0 if x< P_min else(P_del_inversor if x> P_del_inversor else x))
 
     t5, t6, t7 = st.tabs(["Resultados anuales", "Análisis puntual", "Bibliografía de cálculos"])
 
@@ -221,8 +221,8 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.line_chart(datos_ano_resumido_por_mes['Potencia Generada (kW)'], y_label='Potencia Generada (kW)',color="#00ff00", use_container_width=True)
 
         with col8:
-          st.metric(f"Máximo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].max():.2f} kW", border=True)
-          st.metric(f"Mínimo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].min():.2f} kW", border=True)
+          st.metric(f"Máximo: {datos_ano_resumido_por_mes['Potencia Generada (kW)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].max():.2f} kW", border=True)
+          st.metric(f"Mínimo: {datos_ano_resumido_por_mes['Potencia Generada (kW)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].min():.2f} kW", border=True)
           st.metric("Promedio anual:", value= f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].mean():.2f} kW", border=True)
 
     with t6:  #graficas en funcion de que quira ver el usuario
@@ -280,9 +280,9 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
         st.metric(f"Temperatura Promedio:", value=f"{rango_seleccionado['Temperatura (°C)'].mean():.2f} °C", border=True)
       #mostrar potencia generada:°C
       with col12:
-        st.metric(f"Potencia Máxima: {rango_seleccionado['Potencia generada (kW)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].max():.2f} W", border=True)
-        st.metric(f"Potencia Mínima: {rango_seleccionado['Potencia generada (kW)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].min():.2f} W", border=True)
-        st.metric(f"Potencia Promedio:", value=f"{rango_seleccionado['Potencia generada (kW)'].mean():.2f} W", border=True)
+        st.metric(f"Potencia Máxima: {rango_seleccionado['Potencia Generada (kW)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia Generada (kW)'].max():.2f} W", border=True)
+        st.metric(f"Potencia Mínima: {rango_seleccionado['Potencia Generada (kW)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia Generada (kW)'].min():.2f} W", border=True)
+        st.metric(f"Potencia Promedio:", value=f"{rango_seleccionado['Potencia Generada (kW)'].mean():.2f} W", border=True)
       
       #los graficos
       if caja_de_chequeo:
@@ -310,9 +310,9 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.subheader("Potencia:")
           col17, col18= st.columns(2)
           with col17:
-            st.line_chart(data= rango_seleccionado['Potencia generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#00ff00", use_container_width=True)
+            st.line_chart(data= rango_seleccionado['Potencia Generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia Generada (kW)", color="#00ff00", use_container_width=True)
           with col18:
-            st.line_chart(data= rango_de_comparacion['Potencia generada (kW)'], x_label=f"{inicio_de_la_comparacion.strftime('%Y-%m-%d')} - {final_de_la_comparacion.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#ff00ff", use_container_width=True)
+            st.line_chart(data= rango_de_comparacion['Potencia Generada (kW)'], x_label=f"{inicio_de_la_comparacion.strftime('%Y-%m-%d')} - {final_de_la_comparacion.strftime('%Y-%m-%d')}", y_label="Potencia Generada (kW)", color="#ff00ff", use_container_width=True)
         
         else:
           st.title("General:")
@@ -323,7 +323,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.subheader("Temperatura")
           st.line_chart(data= rango_seleccionado['Temperatura (°C)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Temperatura (°C)", color="#ff0000", use_container_width=True)
           st.subheader("Potencia")
-          st.line_chart(data= rango_seleccionado['Potencia generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#00ff00", use_container_width=True)
+          st.line_chart(data= rango_seleccionado['Potencia Generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia Generada (kW)", color="#00ff00", use_container_width=True)
       
       else:
         st.title("General:")
@@ -334,7 +334,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
         st.subheader("Temperatura")
         st.line_chart(data= rango_seleccionado['Temperatura (°C)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Temperatura (°C)", color="#ff0000", use_container_width=True)
         st.subheader("Potencia")
-        st.line_chart(data= rango_seleccionado['Potencia generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#00ff00", use_container_width=True)
+        st.line_chart(data= rango_seleccionado['Potencia Generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia Generada (kW)", color="#00ff00", use_container_width=True)
         
     with t7:  #ventanas pequeñas donde se vean los calculos que se llevan a cabo para mostrar los resoltados
 
@@ -532,7 +532,7 @@ with t3:  #descargas
     # Agregar las secciones al PDF
     agregar_seccion(pdf, "Temperatura", incluir_temp_max, incluir_temp_min, incluir_temp_mean, incluir_temp_graf, "Temperatura (°C)")
     agregar_seccion(pdf, "Irradiancia", incluir_irr_max, incluir_irr_min, incluir_irr_mean, incluir_irr_graf, "Irradiancia (W/m²)")
-    agregar_seccion(pdf, "Potencia", incluir_pot_max, incluir_pot_min, incluir_pot_mean, incluir_pot_graf, "Potencia generada (kW)")
+    agregar_seccion(pdf, "Potencia", incluir_pot_max, incluir_pot_min, incluir_pot_mean, incluir_pot_graf, "Potencia Generada (kW)")
   
     # Guardar el contenido del PDF en el buffer
     pdf_output = pdf.output(dest="S").encode('latin1')  # Usamos .encode() para convertir el PDF a bytes
