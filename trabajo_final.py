@@ -143,7 +143,7 @@ with st.sidebar:
 
   st.markdown("---")
   st.markdown(r"""
-  Autores:<br>
+  ###Autores:<br>
   Renk, Santiago:<br>
   santirenk2004@gmail.com<br>
   Schmuth Gassmann, Katerina:<br>
