@@ -26,7 +26,7 @@ pygments==2.18.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
 referencing==0.35.1
-requests==2.32.3[2024-12-19 03:29:46.752522] 
+requests==2.32.3
 rich==13.9.4
 rpds-py==0.22.3
 six==1.17.0
@@ -37,5 +37,5 @@ toml==0.10.2
 tornado==6.4.2
 typing-extensions==4.12.2
 tzdata==2024.2
-urllib3[2024-12-19 03:29:46.752701] ==2.2.3
+urllib3==2.2.3
 watchdog==6.0.0
