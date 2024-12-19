@@ -25,6 +25,8 @@ from fpdf import FPDF
 st.set_page_config(page_title='Análisis de Datos Solares', layout= "wide")
 st.title('Análisis de Datos Solares')
 
+st.logo("logo_UTN_removebg_preview.png",size="large", link="https://www.frsf.utn.edu.ar/")
+
 t1, t2, t3, = st.tabs(['🌐 General', '📊 Cálculos', '⬇️ Descargas'])
 
 with t1:  #caratula y cargar el archivo
