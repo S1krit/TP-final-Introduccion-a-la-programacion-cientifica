@@ -155,9 +155,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
     # Corrección para la potencia real ec(4)
     P_min = (1 / 100) * P_del_inversor
 
-    # Aplicación de condiciones con .loc para evitar sobrescritura
-    archivo_pasado_a_pandas.loc[archivo_pasado_a_pandas['Potencia generada (kW)'] > P_del_inversor,
-                                'Potencia generada (kW)'] = P_del_inversor
+    archivo_pasado_a_pandas['Potencia generada (kW)'] = archivo_pasado_a_pandas['Potencia generada (kW)'].apply(lambda x: 0 if x< P_min else(P_del_inversor if x> P_del_inversor else x))
 
     t5, t6, t7 = st.tabs(["resultados anuales", "analisis puntual", "bibliografia de calculos"])
 
