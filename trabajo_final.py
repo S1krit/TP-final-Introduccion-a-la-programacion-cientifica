@@ -564,6 +564,3 @@ with t3:  #descargas
 st.markdown("---")
 st.markdown("preuba")
 
-  
-
-
