@@ -201,12 +201,10 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       st.header("Análisis Puntual por Rango de Fechas")
 
-      fecha_inicial= archivo_pasado_a_pandas.index.min().strftime('%Y-%m-%d')
-      precaution_anti_explosions= fecha_inicial + datetime.timedelta(days=2)
-
+      ffecha_inicial= archivo_pasado_a_pandas.index.min().strftime('%Y-%m-%d')
       fecha_final= archivo_pasado_a_pandas.index.max().strftime('%Y-%m-%d')
 
-      inicio_del_grafico, fin_del_grafico= st.date_input("que periodo desea analizar?", value=(fecha_inicial, precaution_anti_explosions), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
+      inicio_del_grafico, fin_del_grafico= st.date_input("que periodo desea analizar?", value=(fecha_inicial, fecha_final), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
 
       fin_del_grafico= fin_del_grafico + datetime.timedelta(days=1)
 
