@@ -21,8 +21,8 @@ from fpdf import FPDF
 # - hacer un boton para guardar los resultados en un archivo
 # - VALIDACION DE DATOS: Si no se cargan datos, mostrar un mensaje de error. Resaltar valores faltantes o incorrectos en rojo, con mensajes explicativos.
 
-st.set_page_config(page_title='Análisis de datos solares', layout= "wide")
-st.title('Análisis de datos solares')
+st.set_page_config(page_title='Análisis de Datos Solares', layout= "wide")
+st.title('Análisis de Datos Solares')
 
 t1, t2, t3, = st.tabs(['General', 'Cálculos', 'Descargar'])
 
@@ -38,7 +38,7 @@ with t1:  #caratula y cargar el archivo
 
     st.dataframe(tabla_ejemplo)
 
-  archivo_subido = st.file_uploader("Cargar un archivo exel (.xlsx)", type=["xlsx"])
+  archivo_subido = st.file_uploader("Cargar un archivo excel (.xlsx)", type=["xlsx"])
 
   if archivo_subido is not None:
     try:
@@ -49,9 +49,9 @@ with t1:  #caratula y cargar el archivo
     
         numero_columnas = len(archivo_pasado_a_pandas.columns)
         if numero_columnas > 2:
-            st.error("ERROR: El archivo tiene más de 3 columnas, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+            st.error("ERROR: El archivo tiene más de 3 columnas, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
         elif numero_columnas < 2:
-            st.error("ERROR: El archivo tiene menos de 3 columnas, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+            st.error("ERROR: El archivo tiene menos de 3 columnas, esto podria causar problemas en el analisis de datos, por favor corregir antes de continuar")
         else:
             columnas_esperadas= ['Irradiancia (W/m²)', 'Temperatura (°C)']
             columnas_subias= archivo_pasado_a_pandas.columns.tolist()
@@ -60,7 +60,7 @@ with t1:  #caratula y cargar el archivo
                     
                 if not filas_vacias.any():
                     if  celdas_vacias>0:
-                        st.error("ERROR: El archivo contiene celdas en blanco, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+                        st.error("ERROR: El archivo contiene celdas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
 
                     else:
                         st.success("Archivo cargado correctamente")
@@ -68,10 +68,10 @@ with t1:  #caratula y cargar el archivo
                             st.table(archivo_pasado_a_pandas)
         
                 else:
-                    st.error("ERROR: El archivo contiene filas en blanco, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+                    st.error("ERROR: El archivo contiene filas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
             
             else:
-                st.error("ERROR: el archivo tiene las columnas de Irradiancia (W/m²) y Temperatura (°C) invertidas, por favor corregir antes de continuar")
+                st.error("ERROR: El archivo tiene las columnas de Irradiancia (W/m²) y Temperatura (°C) invertidas, por favor corregir antes de continuar")
 
     except Exception as e:
         st.error(f"Error al leer el archivo: {e}")
@@ -80,45 +80,45 @@ with t1:  #caratula y cargar el archivo
     col_irradiancia, col_temperatura = archivo_pasado_a_pandas.columns
 
 with st.sidebar:
-  "Parametros de la instalacion fotovoltaica"
+  "Parametros de la instalación fotovoltaica"
 
   valores_predeterminados_UTN = st.button(
-      "Usar valores de la instalacion en la UTN")
+      "Usar valores de la instalación en la UTN")
 
   cantidad_de_paneles = st.number_input(
-      "cantidad de modulos fotovoltaicos",
+      "Cantidad de módulos fotovoltaicos",
       min_value=1,
       value=12 if valores_predeterminados_UTN else 1,
       step=1)
 
   G_estandar = st.number_input(
-      "irradiancia estandar [W/m^2]",
+      "Irradiancia estandar [W/m^2]",
       min_value=0.00,
       value=1000.00 if valores_predeterminados_UTN else 1000.00,
       step=0.01)
 
   T_de_referencia = st.number_input(
-      "temperatura de referencia [°C]",
+      "Temperatura de referencia [°C]",
       min_value=0.00,
       max_value=50.00,
       value=25.00 if valores_predeterminados_UTN else 25.00,
       step=0.01)
 
   P_pico = st.number_input(
-      "potencia pico de cada modulo [W]",
+      "Potencia pico de cada módulo [W]",
       min_value=0.00,
       max_value=380.00,
       value=240.00 if valores_predeterminados_UTN else 220.00,
       step=0.01)
 
   P_del_inversor = st.number_input(
-      "potencia nominal del inversor [kW]",
+      "Potencia nominal del inversor [kW]",
       min_value=0.00,
       value=2500.00 if valores_predeterminados_UTN else 2000.00,
       step=0.01)
 
   k_de_temperatura_potencia = st.number_input(
-      "Coeficiente de temperatura-potencia [°C^(-1)]",
+      "Coeficiente de Temperatura-Potencia [°C^(-1)]",
       min_value=-10.0000,
       max_value=0.0000,
       value=-0.0044 if valores_predeterminados_UTN else -0.0050,
@@ -126,14 +126,14 @@ with st.sidebar:
       format="%0.4f")
 
   rendimiento = st.number_input(
-      "rendimientoglobal de la instalacion",
+      "Rendimientoglobal de la instalación",
       min_value=0.01,
       max_value=1.00,
       value=0.97 if valores_predeterminados_UTN else 1.00,
       step=0.01)
 
   if valores_predeterminados_UTN is True:
-    valores_personalizados = st.button("personalizar valores")
+    valores_personalizados = st.button("Personalizar valores")
 
     if valores_personalizados is True:
       valores_predeterminados_UTN = False
@@ -189,7 +189,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
         
         # Mostrar los datos promedio del año
         with col2:
-          with st.expander("Datos promedio mensuales", expanded=False):
+          with st.expander("Datos Promedio Mensuales", expanded=False):
             st.dataframe(datos_ano_resumido_por_mes)
         
         # Gráfico de irradiancia promedio mensual
@@ -199,17 +199,17 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.line_chart(datos_ano_resumido_por_mes['Irradiancia (W/m²)'], y_label="Irradiancia Promedio Mensual (W/m²)", color= "#0000ff" , use_container_width=True)
 
         with col4:
-          st.metric(f"maximo: {datos_ano_resumido_por_mes['Irradiancia (W/m²)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].max():.2f} W/m²", border=True)
-          st.metric(f"minimo: {datos_ano_resumido_por_mes['Irradiancia (W/m²)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].min():.2f} W/m²", border=True)
-          st.metric("promedio anual:", value= f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].mean():.2f} W/m²", border=True)
+          st.metric(f"Máximo: {datos_ano_resumido_por_mes['Irradiancia (W/m²)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].max():.2f} W/m²", border=True)
+          st.metric(f"Mínimo: {datos_ano_resumido_por_mes['Irradiancia (W/m²)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].min():.2f} W/m²", border=True)
+          st.metric("Promedio anual:", value= f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].mean():.2f} W/m²", border=True)
 
         # Gráfico de temperatura promedio mensual
         st.write(f"#### Gráfico de Temperatura Promedio Mensual en {ano_seleccionado} (°C)")
         col5, col6= st.columns([1, 3])
         with col5:
-          st.metric(f"maximo: {datos_ano_resumido_por_mes['Temperatura (°C)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Temperatura (°C)'].max():.2f} °C", border=True)
-          st.metric(f"minimo: {datos_ano_resumido_por_mes['Temperatura (°C)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Temperatura (°C)'].min():.2f} °C", border=True)
-          st.metric("promedio anual:", value= f"{datos_ano_resumido_por_mes['Temperatura (°C)'].mean():.2f} °C", border=True)
+          st.metric(f"Máximo: {datos_ano_resumido_por_mes['Temperatura (°C)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Temperatura (°C)'].max():.2f} °C", border=True)
+          st.metric(f"Mínimo: {datos_ano_resumido_por_mes['Temperatura (°C)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Temperatura (°C)'].min():.2f} °C", border=True)
+          st.metric("Promedio anual:", value= f"{datos_ano_resumido_por_mes['Temperatura (°C)'].mean():.2f} °C", border=True)
 
         with col6:
           st.line_chart(datos_ano_resumido_por_mes['Temperatura (°C)'], y_label="Temperatura Promedio Mensual (°C)",color="#ff0000" ,use_container_width=True)
@@ -218,12 +218,12 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
         st.write(f"#### Gráfico de Potencia Generada Promedio Mensual en {ano_seleccionado} (kW)")
         col7, col8= st.columns([3, 1])
         with col7:
-          st.line_chart(datos_ano_resumido_por_mes['Potencia generada (kW)'], y_label='Potencia generada (kW)',color="#00ff00", use_container_width=True)
+          st.line_chart(datos_ano_resumido_por_mes['Potencia Generada (kW)'], y_label='Potencia Generada (kW)',color="#00ff00", use_container_width=True)
 
         with col8:
-          st.metric(f"maximo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia generada (kW)'].max():.2f} kW", border=True)
-          st.metric(f"minimo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia generada (kW)'].min():.2f} kW", border=True)
-          st.metric("promedio anual:", value= f"{datos_ano_resumido_por_mes['Potencia generada (kW)'].mean():.2f} kW", border=True)
+          st.metric(f"Máximo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].max():.2f} kW", border=True)
+          st.metric(f"Mínimo: {datos_ano_resumido_por_mes['Potencia generada (kW)'].idxmin().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].min():.2f} kW", border=True)
+          st.metric("Promedio anual:", value= f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].mean():.2f} kW", border=True)
 
     with t6:  #graficas en funcion de que quira ver el usuario
 
@@ -236,7 +236,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       fecha_final= archivo_pasado_a_pandas.index.max().strftime('%Y-%m-%d')
 
-      inicio_del_grafico, fin_del_grafico= st.date_input("que periodo desea analizar?", value=(fecha_inicial, fecha_por_precaucion), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
+      inicio_del_grafico, fin_del_grafico= st.date_input('¿Qué periodo desea analizar?", value=(fecha_inicial, fecha_por_precaucion), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
 
       fin_del_grafico= fin_del_grafico + datetime.timedelta(days=1)
 
@@ -251,48 +251,48 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       #mostrar dias analizados:
       with col9:
-        st.metric("Periodo de analisis:", value=f"{dias_que_se_estan_analizando.days} Dias", border=True)
+        st.metric("Periodo de análisis:", value=f"{dias_que_se_estan_analizando.days} Dias", border=True)
 
         with st.container(border=True):
-          caja_de_chequeo= st.checkbox("comparar con otra fecha?", help="se seleccionara un rago del mismo tamaño que el anterior")
+          caja_de_chequeo= st.checkbox("Comparar con otra fecha", help="Se seleccionará un rago del mismo tamaño que el anterior")
 
           if caja_de_chequeo is True:
 
             maximo_permitido= pd.to_datetime(fecha_final) - dias_que_se_estan_analizando
-            fecha_a_comparar= st.date_input("desde que fecha desea comparar", value=fecha_inicial, min_value= fecha_inicial, max_value= maximo_permitido)
+            fecha_a_comparar= st.date_input("¿Desde que fecha desea comparar?", value=fecha_inicial, min_value= fecha_inicial, max_value= maximo_permitido)
 
             inicio_de_la_comparacion= pd.to_datetime(fecha_a_comparar)
             final_de_la_comparacion= inicio_de_la_comparacion + dias_que_se_estan_analizando
 
             rango_de_comparacion= archivo_pasado_a_pandas[(archivo_pasado_a_pandas.index >= inicio_de_la_comparacion) & (archivo_pasado_a_pandas.index <= final_de_la_comparacion)]
 
-            activar_comparacion= st.toggle("comparar en las graficas")
+            activar_comparacion= st.toggle("Comparar en las gráficas")
 
       #mostrar max/min irradiancia:
       with col10:
-        st.metric(f"Irradiacion maxima: {rango_seleccionado['Irradiancia (W/m²)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Irradiancia (W/m²)'].max():.2f} W/m²", border=True)
-        st.metric(f"Irradiacion minima: {rango_seleccionado['Irradiancia (W/m²)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Irradiancia (W/m²)'].min():.2f} W/m²", border=True)
-        st.metric(f"Irradiancia promedio:", value=f"{rango_seleccionado['Irradiancia (W/m²)'].mean():.2f} W/m²", border=True)
+        st.metric(f"Irradiacion Máxima: {rango_seleccionado['Irradiancia (W/m²)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Irradiancia (W/m²)'].max():.2f} W/m²", border=True)
+        st.metric(f"Irradiacion Mínima: {rango_seleccionado['Irradiancia (W/m²)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Irradiancia (W/m²)'].min():.2f} W/m²", border=True)
+        st.metric(f"Irradiancia Promedio:", value=f"{rango_seleccionado['Irradiancia (W/m²)'].mean():.2f} W/m²", border=True)
       #mostrar max/min temperatura:
       with col11:
-        st.metric(f"Te,peratura maxima: {rango_seleccionado['Temperatura (°C)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Temperatura (°C)'].max():.2f} °C", border=True)
-        st.metric(f"Temperatura minima: {rango_seleccionado['Temperatura (°C)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Temperatura (°C)'].min():.2f} °C", border=True)
-        st.metric(f"Temperatura promedio:", value=f"{rango_seleccionado['Temperatura (°C)'].mean():.2f} °C", border=True)
+        st.metric(f"Te,peratura Máxima: {rango_seleccionado['Temperatura (°C)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Temperatura (°C)'].max():.2f} °C", border=True)
+        st.metric(f"Temperatura Mínima: {rango_seleccionado['Temperatura (°C)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Temperatura (°C)'].min():.2f} °C", border=True)
+        st.metric(f"Temperatura Promedio:", value=f"{rango_seleccionado['Temperatura (°C)'].mean():.2f} °C", border=True)
       #mostrar potencia generada:°C
       with col12:
-        st.metric(f"potencia maxima: {rango_seleccionado['Potencia generada (kW)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].max():.2f} W", border=True)
-        st.metric(f"potencia minima: {rango_seleccionado['Potencia generada (kW)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].min():.2f} W", border=True)
-        st.metric(f"potencia promedio:", value=f"{rango_seleccionado['Potencia generada (kW)'].mean():.2f} W", border=True)
+        st.metric(f"Potencia Máxima: {rango_seleccionado['Potencia generada (kW)'].idxmax().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].max():.2f} W", border=True)
+        st.metric(f"Potencia Mínima: {rango_seleccionado['Potencia generada (kW)'].idxmin().strftime('%Y-%m-%d')}", value=f"{rango_seleccionado['Potencia generada (kW)'].min():.2f} W", border=True)
+        st.metric(f"Potencia Promedio:", value=f"{rango_seleccionado['Potencia generada (kW)'].mean():.2f} W", border=True)
       
       #los graficos
       if caja_de_chequeo:
         if activar_comparacion:
           
-          st.title("general:")
+          st.title("General:")
           st.line_chart(rango_seleccionado, x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", color=("#0000ff", "#ff0000", "#00ff00"))
           st.line_chart(rango_de_comparacion, x_label=f"{inicio_de_la_comparacion.strftime('%Y-%m-%d')} - {final_de_la_comparacion.strftime('%Y-%m-%d')}", color=("#ffff00", "#00ffff", "#ff00ff"))
 
-          st.title("detallado")
+          st.title("Detallado")
           st.subheader("Irradiancia:")
           col13, col14= st.columns(2)
           with col13:
@@ -315,7 +315,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
             st.line_chart(data= rango_de_comparacion['Potencia generada (kW)'], x_label=f"{inicio_de_la_comparacion.strftime('%Y-%m-%d')} - {final_de_la_comparacion.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#ff00ff", use_container_width=True)
         
         else:
-          st.title("general:")
+          st.title("General:")
           st.line_chart(rango_seleccionado, x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", color=("#0000ff", "#ff0000", "#00ff00"))
           st.title("detallado:")
           st.subheader("Irradiancia:")
@@ -326,7 +326,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.line_chart(data= rango_seleccionado['Potencia generada (kW)'], x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", y_label="Potencia generada (kW)", color="#00ff00", use_container_width=True)
       
       else:
-        st.title("general:")
+        st.title("General:")
         st.line_chart(rango_seleccionado, x_label=f"{inicio_del_grafico.strftime('%Y-%m-%d')} - {fin_del_grafico.strftime('%Y-%m-%d')}", color=("#0000ff", "#ff0000", "#00ff00"))
         st.title("detallado:")
         st.subheader("Irradiancia:")
@@ -340,7 +340,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       #ecuacion de potencia
       st.markdown(r""" 
-      La ecuacion utilizada para calcular la potencia generada por los paneles es:
+      La ecuación utilizada para calcular la potencia generada por los paneles es:
       $$
       P= N\cdot \frac{G}{G_{std}}\cdot P_{pico} \cdot [1+ k_p\cdot (T_c-T_r)] \cdot \eta \cdot 10^{-3}
       $$                 
@@ -348,15 +348,15 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       with st.expander("Variables", expanded=False):
         st.markdown(r"""     
-        * $P$ (kW): potencia generada por el generador fotovoltaico
-        * $N$: cantidad de modulos fotovoltaicos instalados 
-        * $G$ [W/m$^2$]: irradiancia captada por los modulos fotovoltaicos
-        * $G_{std}$ [W/m$^2$]: irradiancia estandar
-        * $T_r$ [C°]: temperatura de referencia
-        * $T_c$ [C°]: temperatura de la celda
-        * $P_{pico}$ [W]: potencia pico de cada modulo
-        * $k_p$ [C$^{-1}$]: Coeficiente temperatura-potencia
-        * $\eta$: rendimiento global de la instalacion "por unidad"        
+        * $P$ (kW): Potencia generada por el generador fotovoltaico.
+        * $N$: Cantidad de módulos fotovoltaicos instalados.
+        * $G$ [W/m$^2$]: Irradiancia captada por los módulos fotovoltaicos.
+        * $G_{std}$ [W/m$^2$]: Irradiancia estandar.
+        * $T_r$ [C°]: Temperatura de referencia.
+        * $T_c$ [C°]: Temperatura de la celda.
+        * $P_{pico}$ [W]: Potencia pico de cada módulo.
+        * $k_p$ [C$^{-1}$]: Coeficiente Temperatura-Potencia.
+        * $\eta$: Rendimiento global de la instalación "por unidad".        
         """)
 
       #estimacion de T_c
@@ -369,14 +369,14 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       with st.expander("Variables", expanded=False):
         st.markdown(r"""
-        * $T$ [°C]: temperatura ambiente
-        * $T_r$ [C°]: temperatura de referencia
-        * $G$ [W/m$^2$]: irradiancia captada por los modulos fotovoltaicos
+        * $T$ [°C]: Temperatura ambiente.
+        * $T_r$ [C°]: Temperatura de referencia.
+        * $G$ [W/m$^2$]: Irradiancia captada por los módulos fotovoltaicos.
         """)
 
       #Limites de generacion
       st.markdown(r"""
-      Los limites de generacion de los modulos fotovoltaicos estan dados por la siguiente relacion:
+      Los limites de generación de los módulos fotovoltaicos estan dados por la siguiente relación:
       $$
       P_{min}= \frac{\mu (\%)}{100}\cdot P_{inv}
       $$
@@ -390,11 +390,11 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       with st.expander("Variables", expanded=False):
         st.markdown(r"""
-        * $P_r$ (kW): potencia real generada por el generador fotovoltaico
-        * $P$ (kW): potencia generada por el generador fotovoltaico
-        * $P_{min}$ (kW): potencia minima generada por el generador fotovoltaico
-        * $P_{inv}$ (kW): potencia nominal del inversor
-        * $\mu$: se asume 10%
+        * $P_r$ (kW): Potencia real generada por el generador fotovoltaico.
+        * $P$ (kW): Potencia generada por el generador fotovoltaico.
+        * $P_{min}$ (kW): Potencia minima generada por el generador fotovoltaico.
+        * $P_{inv}$ (kW): Potencia nominal del inversor.
+        * $\mu$: Se asume 10%
         """)
 
 with t3:  #descargas
@@ -404,7 +404,7 @@ with t3:  #descargas
     st.header("Descargar Informe Personalizado en PDF")
   
     # Selección del tipo de análisis: Anual o por Fecha
-    st.markdown("### Seleccione el tipo de análisis")
+    st.markdown("### Tipo de análisis")
     tipo_analisis = st.radio("Elija la fuente de datos para el informe:", options=["Anual", "Por Fecha"], index=1)  # Botón de selección, por defecto se elige "Por Fecha"
   
     # Determinar la fuente de datos basada en la selección del tipo de análisis
