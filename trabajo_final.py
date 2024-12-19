@@ -42,15 +42,40 @@ with t1:  #caratula y cargar el archivo
 
   if archivo_subido is not None:
     try:
-      archivo_pasado_a_pandas = pd.read_excel(archivo_subido, index_col=0)
-      st.success("archivo cargado correctamente")
+        archivo_pasado_a_pandas = pd.read_excel(archivo_subido, index_col=0)
+       
+        filas_vacias= archivo_pasado_a_pandas.isnull().all(axis=1)
+        celdas_vacias= archivo_pasado_a_pandas.isnull().sum().sum()
+    
+        numero_columnas = len(archivo_pasado_a_pandas.columns)
+        if numero_columnas > 2:
+            st.error("ERROR: El archivo tiene más de 3 columnas, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+        elif numero_columnas < 2:
+            st.error("ERROR: El archivo tiene menos de 3 columnas, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+        else:
+            columnas_esperadas= ['Irradiancia (W/m²)', 'Temperatura (°C)']
+            columnas_subias= archivo_pasado_a_pandas.columns.tolist()
 
-      with st.expander("Vista previa de datos", expanded=False):
-        st.table(archivo_pasado_a_pandas)
+            if columnas_subias[:2] == columnas_esperadas:
+                    
+                if not filas_vacias.any():
+                    if  celdas_vacias>0:
+                        st.error("ERROR: El archivo contiene celdas en blanco, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+
+                    else:
+                        st.success("El archivo ha sido cargado correctamente")
+                        with st.expander("Vista previa de datos", expanded=False):
+                            st.table(archivo_pasado_a_pandas)
+        
+                else:
+                    st.error("ERROR: El archivo contiene filas en blanco, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
+            
+            else:
+                st.error("ERROR: el archivo tiene las columnas de Irradiancia (W/m²) y Temperatura (°C) invertidas, por favor corregir antes de continuar")
 
     except Exception as e:
+        st.error(f"Error al leer el archivo: {e}")
 
-      st.error(f"Error al leer el archivo: {e}")
 
     col_irradiancia, col_temperatura = archivo_pasado_a_pandas.columns
 
