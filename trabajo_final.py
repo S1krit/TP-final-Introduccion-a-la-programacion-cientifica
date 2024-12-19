@@ -236,7 +236,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
       fecha_final= archivo_pasado_a_pandas.index.max().strftime('%Y-%m-%d')
 
-      inicio_del_grafico, fin_del_grafico= st.date_input('¿Qué periodo desea analizar?", value=(fecha_inicial, fecha_por_precaucion), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
+      inicio_del_grafico, fin_del_grafico= st.date_input("¿Qué periodo desea analizar?", value=(fecha_inicial, fecha_por_precaucion), min_value= fecha_inicial, max_value= fecha_final, format= "DD/MM/YYYY")
 
       fin_del_grafico= fin_del_grafico + datetime.timedelta(days=1)
 
