@@ -24,7 +24,7 @@ from fpdf import FPDF
 st.set_page_config(page_title='Análisis de datos solares', layout= "wide")
 st.title('Análisis de datos solares')
 
-t1, t2, t3, t4, = st.tabs(['General', 'Calculos', 'Descargar', "prebas"])
+t1, t2, t3, = st.tabs(['General', 'Calculos', 'Descargar'])
 
 with t1:  #caratula y cargar el archivo
 
