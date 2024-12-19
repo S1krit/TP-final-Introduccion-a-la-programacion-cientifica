@@ -24,11 +24,11 @@ from fpdf import FPDF
 st.set_page_config(page_title='Análisis de datos solares', layout= "wide")
 st.title('Análisis de datos solares')
 
-t1, t2, t3, = st.tabs(['General', 'Calculos', 'Descargar'])
+t1, t2, t3, = st.tabs(['General', 'Cálculos', 'Descargar'])
 
 with t1:  #caratula y cargar el archivo
 
-  with st.expander("formato esperado del archivo exel", expanded=False):
+  with st.expander("Formato esperado del archivo excel", expanded=False):
 
     tabla_ejemplo = pd.DataFrame({
         "Fecha": ["2024-01-01", "2024-01-02", "2024-01-03", "..."],
@@ -63,7 +63,7 @@ with t1:  #caratula y cargar el archivo
                         st.error("ERROR: El archivo contiene celdas en blanco, esto podria causar problemas en el analisis de datos, por favaor corregir antes de continuar")
 
                     else:
-                        st.success("El archivo ha sido cargado correctamente")
+                        st.success("Archivo cargado correctamente")
                         with st.expander("Vista previa de datos", expanded=False):
                             st.table(archivo_pasado_a_pandas)
         
@@ -112,7 +112,7 @@ with st.sidebar:
       step=0.01)
 
   P_del_inversor = st.number_input(
-      "potencia nominal del inversor (kW)",
+      "potencia nominal del inversor [kW]",
       min_value=0.00,
       value=2500.00 if valores_predeterminados_UTN else 2000.00,
       step=0.01)
@@ -157,7 +157,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
     archivo_pasado_a_pandas['Potencia generada (kW)'] = archivo_pasado_a_pandas['Potencia generada (kW)'].apply(lambda x: 0 if x< P_min else(P_del_inversor if x> P_del_inversor else x))
 
-    t5, t6, t7 = st.tabs(["resultados anuales", "analisis puntual", "bibliografia de calculos"])
+    t5, t6, t7 = st.tabs(["Resultados anuales", "Análisis puntual", "Bibliografía de cálculos"])
 
     with t5:  # Graficas anuales (no modificables)
 
