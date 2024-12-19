@@ -209,7 +209,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
         st.write(f"#### Gráfico de Irradiancia Promedio Mensual en {ano_seleccionado} (W/m²)")
         col3, col4= st.columns([3, 1])
         with col3:
-          st.line_chart(datos_ano_resumido_por_mes['Irradiancia (W/m²)'], y_label="Irradiancia Promedio Mensual (W/m²)", color= "#0000ff" , use_container_width=True)
+          st.bar_chart(datos_ano_resumido_por_mes['Irradiancia (W/m²)'], y_label="Irradiancia Promedio Mensual (W/m²)", color= "#0000ff" , use_container_width=True)
 
         with col4:
           st.metric(f"Máximo: {datos_ano_resumido_por_mes['Irradiancia (W/m²)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Irradiancia (W/m²)'].max():.2f} W/m²", border=True)
@@ -225,13 +225,13 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
           st.metric("Promedio anual:", value= f"{datos_ano_resumido_por_mes['Temperatura (°C)'].mean():.2f} °C", border=True)
 
         with col6:
-          st.line_chart(datos_ano_resumido_por_mes['Temperatura (°C)'], y_label="Temperatura Promedio Mensual (°C)",color="#ff0000" ,use_container_width=True)
+          st.bar_chart(datos_ano_resumido_por_mes['Temperatura (°C)'], y_label="Temperatura Promedio Mensual (°C)",color="#ff0000" ,use_container_width=True)
 
         # Gráfico de potencia generada promedio mensual
         st.write(f"#### Gráfico de Potencia Generada Promedio Mensual en {ano_seleccionado} (kW)")
         col7, col8= st.columns([3, 1])
         with col7:
-          st.line_chart(datos_ano_resumido_por_mes['Potencia Generada (kW)'], y_label='Potencia Generada (kW)',color="#00ff00", use_container_width=True)
+          st.bar_chart(datos_ano_resumido_por_mes['Potencia Generada (kW)'], y_label='Potencia Generada (kW)',color="#00ff00", use_container_width=True)
 
         with col8:
           st.metric(f"Máximo: {datos_ano_resumido_por_mes['Potencia Generada (kW)'].idxmax().strftime('%B')}", value=f"{datos_ano_resumido_por_mes['Potencia Generada (kW)'].max():.2f} kW", border=True)
@@ -413,7 +413,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 with t3:  #descargas
   if archivo_subido is not None:
 
-    st.header("Descargue un archivo exel con los datos finales de potencia:")
+    st.header("Descargar un archivo excel con los datos finales de potencia:")
     descarga_de_exel_con_datos_finales= io.BytesIO()
     archivo_pasado_a_pandas.to_excel(descarga_de_exel_con_datos_finales)
     st.download_button("⬇️ Descargar tabla de resultados ⬇️", data=descarga_de_exel_con_datos_finales, file_name="Tabla con columna de potencia.xlsx")
