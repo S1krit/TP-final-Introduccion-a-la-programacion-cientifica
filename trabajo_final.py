@@ -25,7 +25,7 @@ from fpdf import FPDF
 st.set_page_config(page_title='Análisis de Datos Solares', layout= "wide")
 st.title('Análisis de Datos Solares')
 
-t1, t2, t3, = st.tabs(['General', 'Cálculos', 'Descargar'])
+t1, t2, t3, = st.tabs(['🌐 General', '📊 Cálculos', '⬇ Descargas'])
 
 with t1:  #caratula y cargar el archivo
 
@@ -50,9 +50,9 @@ with t1:  #caratula y cargar el archivo
     
         numero_columnas = len(archivo_pasado_a_pandas.columns)
         if numero_columnas > 2:
-            st.error("ERROR: El archivo tiene más de 3 columnas, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
+            st.error("⚠️ERROR⚠️: El archivo tiene más de 3 columnas, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
         elif numero_columnas < 2:
-            st.error("ERROR: El archivo tiene menos de 3 columnas, esto podria causar problemas en el analisis de datos, por favor corregir antes de continuar")
+            st.error("⚠️ERROR⚠️: El archivo tiene menos de 3 columnas, esto podria causar problemas en el analisis de datos, por favor corregir antes de continuar")
         else:
             columnas_esperadas= ['Irradiancia (W/m²)', 'Temperatura (°C)']
             columnas_subias= archivo_pasado_a_pandas.columns.tolist()
@@ -61,21 +61,21 @@ with t1:  #caratula y cargar el archivo
                     
                 if not filas_vacias.any():
                     if  celdas_vacias>0:
-                        st.error("ERROR: El archivo contiene celdas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
+                        st.error("⚠️ERROR⚠️: El archivo contiene celdas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
 
                     else:
-                        st.success("Archivo cargado correctamente")
+                        st.success("✅ Archivo cargado correctamente")
                         with st.expander("Vista previa de datos", expanded=False):
                             st.table(archivo_pasado_a_pandas)
         
                 else:
-                    st.error("ERROR: El archivo contiene filas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
+                    st.error("⚠️ERROR⚠️: El archivo contiene filas en blanco, esto podría causar problemas en el análisis de datos, por favor corregir antes de continuar")
             
             else:
-                st.error("ERROR: El archivo tiene las columnas de Irradiancia (W/m²) y Temperatura (°C) invertidas, por favor corregir antes de continuar")
+                st.error("⚠️ERROR⚠️: El archivo tiene las columnas de Irradiancia (W/m²) y Temperatura (°C) invertidas, por favor corregir antes de continuar")
 
     except Exception as e:
-        st.error(f"Error al leer el archivo: {e}")
+        st.error(f"⚠️Error⚠️ al leer el archivo: {e}")
 
 
     col_irradiancia, col_temperatura = archivo_pasado_a_pandas.columns
@@ -174,7 +174,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
       
       # Verificar si hay datos para el año seleccionado
       if datos_ano_seleccionado.empty:
-        st.error(f"No se cuentan con los datos del año {ano_seleccionado} en la base de datos.")
+        st.error(f"⚠️ No se cuentan con los datos del año {ano_seleccionado} en la base de datos.")
       else:
         # Resumen de Resultados
         st.write(f"### Resumen de Resultados del Año {ano_seleccionado}")
@@ -454,7 +454,7 @@ with t3:  #descargas
     if not any([incluir_temp_max, incluir_temp_min, incluir_temp_mean, incluir_temp_graf,
                 incluir_irr_max, incluir_irr_min, incluir_irr_mean, incluir_irr_graf,
                 incluir_pot_max, incluir_pot_min, incluir_pot_mean, incluir_pot_graf]):
-        st.error("Debe seleccionar al menos un parámetro o gráfico para incluir en el informe.")
+        st.error("❗Debe seleccionar al menos un parámetro o gráfico para incluir en el informe.")
         st.stop()
   
     # Crear un PDF en memoria
@@ -533,7 +533,7 @@ with t3:  #descargas
             pdf.add_page()
 
         except KeyError:
-          st.error("No se encontró la columna en los datos.")
+          st.error("⚠️ No se encontró la columna en los datos.")
   
     # Agregar las secciones al PDF
     agregar_seccion(pdf, "Temperatura", incluir_temp_max, incluir_temp_min, incluir_temp_mean, incluir_temp_graf, "Temperatura (°C)")
