@@ -144,10 +144,10 @@ with st.sidebar:
   st.markdown("---")
   st.markdown(r"""
   Autores:<br>
-  Renk, Santiago: 
-  * santirenk2004@gmail.com
-  Schmuth Gassmann, Katerina:
-  * katerinaschmuth@hotmail.com
+  Renk, Santiago:<br>
+  santirenk2004@gmail.com<br>
+  Schmuth Gassmann, Katerina:<br>
+  katerinaschmuth@hotmail.com
   """, unsafe_allow_html=True)
 
 
