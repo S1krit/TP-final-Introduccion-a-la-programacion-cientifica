@@ -153,7 +153,7 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
     archivo_pasado_a_pandas['Potencia generada (kW)'] = potencia_generada
 
     # Corrección para la potencia real ec(4)
-    P_min = (1 / 100) * P_del_inversor
+    P_min = (0.1 / 100) * P_del_inversor
 
     archivo_pasado_a_pandas['Potencia generada (kW)'] = archivo_pasado_a_pandas['Potencia generada (kW)'].apply(lambda x: 0 if x< P_min else(P_del_inversor if x> P_del_inversor else x))
 
