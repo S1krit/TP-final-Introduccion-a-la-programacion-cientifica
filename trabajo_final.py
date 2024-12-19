@@ -25,7 +25,7 @@ from fpdf import FPDF
 st.set_page_config(page_title='Análisis de Datos Solares', layout= "wide")
 st.title('Análisis de Datos Solares')
 
-t1, t2, t3, = st.tabs(['🌐 General', '📊 Cálculos', '⬇ Descargas'])
+t1, t2, t3, = st.tabs(['🌐 General', '📊 Cálculos', '⬇️ Descargas'])
 
 with t1:  #caratula y cargar el archivo
 
@@ -549,7 +549,7 @@ with t3:  #descargas
     if buffer.getbuffer().nbytes > 0:
         file_name = f"informe_{tipo_analisis.lower()}_{datetime.datetime.now().strftime('%Y-%m-%d')}.pdf"  # Nombre del archivo PDF
         st.download_button(
-            label="Descargar Informe en PDF",  # Texto del botón
+            label="⬇️ Descargar Informe en PDF ⬇️",  # Texto del botón
             data=buffer,  # Contenido del archivo
             file_name=file_name,  # Nombre del archivo
             mime="application/pdf",  # Tipo MIME del archivo
