@@ -142,7 +142,10 @@ with st.sidebar:
       valores_predeterminados_UTN = False
 
   st.markdown("---")
-  st.markdown("preuba")
+  st.markdown("""Autores:
+  Renk, Santiago: santirenk2004@gmail.com
+  Schmuth Gassmann, Katerina: katerinaschmuth@hotmail.com
+  """)
 
 with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
