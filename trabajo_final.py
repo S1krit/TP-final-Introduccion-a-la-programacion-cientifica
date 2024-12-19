@@ -399,6 +399,11 @@ with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
 with t3:  #descargas
   if archivo_subido is not None:
+
+    st.header("Descargue un archivo exel con los datos finales de potencia:")
+    descarga_de_exel_con_datos_finales= io.BytesIO()
+    archivo_pasado_a_pandas.to_excel(descarga_de_exel_con_datos_finales)
+    st.download_button("⬇️ Descargar tabla de resultados ⬇️", data=descarga_de_exel_con_datos_finales, file_name="Tabla con columna de potencia.xlsx")
     
     # Encabezado para la sección del informe en la aplicación
     st.header("Descargar Informe Personalizado en PDF")
