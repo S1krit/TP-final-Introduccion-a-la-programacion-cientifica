@@ -9,6 +9,7 @@ import streamlit as st
 import datetime
 
 import os
+import io
 import seaborn as sns
 from io import BytesIO
 from fpdf import FPDF
