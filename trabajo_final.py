@@ -492,16 +492,22 @@ with t3:  #descargas
             y_before = pdf.get_y()  # Obtener la posición vertical actual del texto
 
             if incluir_graf:
-              if y_before > 250:  # Si la posición vertical es mayor a 250 (casi al final de la página)
-                  pdf.add_page()  # Añadir nueva página
-                  y_before = pdf.get_y()  # Actualizar la posición para la nueva página
-              
+                
               pdf.ln(10)  # Agregar espacio entre el texto y la imagen
 
               # Crear la gráfica con matplotlib
               fig, ax = plt.subplots(figsize=(6, 4))
-              Fuente_datos[columna].plot(ax=ax)
-              ax.set_title(f"Gráfico de {nombre}")
+
+              if tipo_analisis == "Por Fecha":
+                  # Gráfico directo si el análisis es por fecha
+                  Fuente_datos[columna].plot(ax=ax)
+                  ax.set_title(f"Gráfico de {nombre} (Por Fecha)")
+              else:
+                  # Gráfico con promedios mensuales si el análisis es anual
+                  datos_mensuales = Fuente_datos[columna].resample('M').mean()
+                  datos_mensuales.plot(ax=ax)
+                  ax.set_title(f"Gráfico de {nombre} (Promedios Mensuales)")
+
               ax.set_xlabel("Tiempo")
               ax.set_ylabel(nombre)
 
@@ -517,14 +523,9 @@ with t3:  #descargas
               pdf.ln(95)  # Ajusta este valor si es necesario para dar más espacio
 
               # Eliminar la imagen temporal
-              os.remove(temp_imagepath) 
-              # Verificar espacio antes de iniciar la siguiente sección
-            if pdf.get_y() > 260:  # Si estamos cerca del final de la página
-              pdf.add_page()  # Añadir nueva página
-              y_before = 15  # Ajustar posición inicial en la nueva página
+              os.remove(temp_imagepath)
+            pdf.add_page()
 
-            pdf.ln(40)
-            pdf.add_page()  # Añadir nueva página
         except KeyError:
           st.error("No se encontró la columna en los datos.")
   
@@ -553,6 +554,8 @@ with t3:  #descargas
   
     # Cerrar el buffer
     buffer.close()  # Liberar los recursos del buffer
+  
+
   
 
 
