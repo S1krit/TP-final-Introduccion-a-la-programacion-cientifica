@@ -3,7 +3,6 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from pandas.tseries.offsets import Minute
 import streamlit as st
 import datetime
