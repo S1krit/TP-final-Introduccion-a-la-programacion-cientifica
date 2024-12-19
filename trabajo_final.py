@@ -142,7 +142,8 @@ with st.sidebar:
       valores_predeterminados_UTN = False
 
   st.markdown("---")
-  st.markdown(r"""Autores:
+  st.markdown(r"""
+  Autores:
   Renk, Santiago: santirenk2004@gmail.com
   Schmuth Gassmann, Katerina: katerinaschmuth@hotmail.com
   """)
