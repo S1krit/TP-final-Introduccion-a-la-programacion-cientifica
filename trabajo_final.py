@@ -143,10 +143,11 @@ with st.sidebar:
 
   st.markdown("---")
   st.markdown(r"""
-  Autores:
-  Renk, Santiago: santirenk2004@gmail.com
+  Autores:<br>
+  Renk, Santiago: santirenk2004@gmail.com<br>
   Schmuth Gassmann, Katerina: katerinaschmuth@hotmail.com
-  """)
+  """, unsafe_allow_html=True)
+
 
 with t2:  #resultados para la instalacion fotvoltaica (calculos)
 
