@@ -115,7 +115,7 @@ with st.sidebar:
       step=0.01)
 
   P_del_inversor = st.number_input(
-      "Potencia nominal del inversor [kW]",
+      "Potencia nominal del inversor [W]",
       min_value=0.00,
       value=2500.00 if valores_predeterminados_UTN else 2000.00,
       step=0.01)
